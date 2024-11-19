@@ -27,12 +27,5 @@ public class userLoginActivity extends AppCompatActivity {
         binding = ActivityUserLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_user_login);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-
-
     }
 }
