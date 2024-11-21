@@ -27,4 +27,5 @@ public class splashScreen extends AppCompatActivity {
             finish(); // Finish splash activity to remove it from back stack
         }, 3000); // 3000 milliseconds = 3 seconds
     }
+
 }

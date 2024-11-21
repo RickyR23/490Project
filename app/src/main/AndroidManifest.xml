@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LegatoApp"
         tools:targetApi="31">
-
+        <activity
+            android:name=".userHome"
+            android:exported="false"
+            android:theme="@style/Theme.LegatoApp" />
         <!-- Splash Screen Activity -->
         <activity
             android:name=".splashScreen"
@@ -20,17 +23,14 @@
             android:theme="@style/Theme.LegatoApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Login Activity -->
+        </activity> <!-- Login Activity -->
         <activity
             android:name=".userLoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.LegatoApp" />
-
-        <!-- Signup Activity -->
+            android:theme="@style/Theme.LegatoApp" /> <!-- Signup Activity -->
         <activity
             android:name=".signUp"
             android:exported="false" />

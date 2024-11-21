@@ -5,4 +5,11 @@
     <string name="login_password">Password</string>
     <!-- Splash Screen Text -->
     <string name="splash_screen_text">Legato\n"Stay connected like Legato"</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="contextDescriptionLoginButton">Transition to home page from login page</string>
 </resources>
