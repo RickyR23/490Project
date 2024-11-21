@@ -3,4 +3,6 @@
     <!-- Login Activity -->
     <string name="login_username">Username</string>
     <string name="login_password">Password</string>
+    <!-- Splash Screen Text -->
+    <string name="splash_screen_text">Legato\n"Stay connected like Legato"</string>
 </resources>
