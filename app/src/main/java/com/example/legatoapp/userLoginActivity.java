@@ -63,4 +63,29 @@ public class userLoginActivity extends AppCompatActivity {
         Intent intent = new Intent(userLoginActivity.this, forgetPassword.class);
         startActivity(intent);
     }
+
+    private void sendLogin(username,password)
+    {
+        ProcessBuilder pb = new ProcessBuilder("python", "checklogin.py");
+        Process process = pb.start();
+        try (PrintWriter writer = new PrintWriter(process.getOutputStream())) 
+        {
+            writer.println(username); //send username
+            write.println(password) //sendpassword
+            writer.flush();
+        }
+    }
+
+    private void checklogin(username, password) //temp maybe?
+    {
+        if(username.equals('admin') && password.equals('password') )
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
 }
+
