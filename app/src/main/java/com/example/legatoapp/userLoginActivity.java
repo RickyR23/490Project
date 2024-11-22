@@ -64,7 +64,7 @@ public class userLoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void sendLogin(username,password)
+    private void sendLogin(username,password) //sends to python scipt to check login //DB in future //might not keep
     {
         ProcessBuilder pb = new ProcessBuilder("python", "checklogin.py");
         Process process = pb.start();
@@ -76,15 +76,15 @@ public class userLoginActivity extends AppCompatActivity {
         }
     }
 
-    private void checklogin(username, password) //temp maybe?
+    private void checklogin(username, password) //temp maybe? 
     {
         if(username.equals('admin') && password.equals('password') )
         {
-            return true
+            return true //continue to home page
         }
         else
         {
-            return false
+            return false //stay in login page
         }
     }
 }
