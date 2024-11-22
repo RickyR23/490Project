@@ -3,23 +3,16 @@ package com.example.legatoapp;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.Button;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import android.widget.TextView;
 
 import com.example.legatoapp.databinding.ActivityUserLoginBinding;
 
 public class userLoginActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
     private ActivityUserLoginBinding binding;
 
     @Override
@@ -29,20 +22,45 @@ public class userLoginActivity extends AppCompatActivity {
         binding = ActivityUserLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Button launch_to_home = (Button)findViewById(R.id.launch_tohomepage);
+        Button launch_to_home = findViewById(R.id.launch_tohomepage);
         launch_to_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchhomeactivity();
+                launchHomeActivity();
                 finish();
+            }
+        });
 
+        Button launch_to_signup = findViewById(R.id.launch_tosignuppage);
+        launch_to_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchSignupActivity();
+                finish();
+            }
+        });
+
+        TextView forgotPasswordText = findViewById(R.id.forgotPasswordText);
+        forgotPasswordText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchForgotPasswordActivity();
             }
         });
     }
 
-private void launchhomeactivity(){
-    Intent intent = new Intent(userLoginActivity.this, userHome.class);
-    startActivity(intent);
-}
+    private void launchHomeActivity() {
+        Intent intent = new Intent(userLoginActivity.this, userHome.class);
+        startActivity(intent);
+    }
 
+    private void launchSignupActivity() {
+        Intent intent = new Intent(userLoginActivity.this, signUp.class);
+        startActivity(intent);
+    }
+
+    private void launchForgotPasswordActivity() {
+        Intent intent = new Intent(userLoginActivity.this, forgetPassword.class);
+        startActivity(intent);
+    }
 }
