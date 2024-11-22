@@ -25,7 +25,7 @@ public class splashScreen extends AppCompatActivity {
             startActivity(intent);
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             finish(); // Finish splash activity to remove it from back stack
-        }, 3000); // 3000 milliseconds = 3 seconds
+        }, 2000); // 2000 milliseconds = 2 seconds
     }
 
 }
