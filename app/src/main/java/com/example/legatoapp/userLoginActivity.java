@@ -7,10 +7,12 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.legatoapp.databinding.ActivityUserLoginBinding;
 
@@ -27,31 +29,24 @@ public class userLoginActivity extends AppCompatActivity {
         binding = ActivityUserLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        EditText usernameInput = findViewById(R.id.username);
-        EditText passwordInput = findViewById(R.id.loginPassword);
-        userInputString = usernameInput.getText().toString().trim();
-        passwordInputString = passwordInput.getText().toString().trim();
-
-
-
-
         Button launch_to_home = findViewById(R.id.launch_tohomepage);
         launch_to_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checklogin(userInputString, passwordInputString)){
+
+                EditText usernameInput = findViewById(R.id.username);
+                EditText passwordInput = findViewById(R.id.loginPassword);
+                userInputString = usernameInput.getText().toString();
+                passwordInputString = passwordInput.getText().toString();
+
+                Boolean checkLoginValidity = checklogin(userInputString, passwordInputString);
+                Log.d("checkLoginValidity", "is true?: " + checkLoginValidity);
+                if(checkLoginValidity){
                     launchHomeActivity();
                     finish();
                 }
                 else{
-                    AlertDialog.Builder alert = new AlertDialog.Builder(userLoginActivity.this);
-                    alert.setMessage("Please try again.").setTitle("Password Incorrect");
-                    // Set Alert Title
-
-                    // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
-                    alert.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
-                        dialog.cancel();
-                    });
+                    Toast.makeText(userLoginActivity.this, "Login Unsuccessful", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -102,7 +97,10 @@ public class userLoginActivity extends AppCompatActivity {
 //    }
 
     private Boolean checklogin(String username, String password){
-        if(username.equals("admin") && password.equals("password")){
+        String mockUsername = "admin";
+        String mockPassword = "password";
+        Log.d("checkLogin", "mockUser: " + mockUsername + "\ninputUser: " + username + "\n mockPass: " + mockPassword + "\n inputPass: " + password);
+        if(username.equals(mockUsername) && password.equals(mockPassword)){
             return true; //continue to home page
         }
         else{
