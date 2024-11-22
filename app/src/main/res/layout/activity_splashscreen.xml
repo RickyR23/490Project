@@ -7,32 +7,14 @@
     android:layout_height="match_parent"
     android:background="@color/blue_logo">
 
-    <!-- ImageView for the Logo -->
-
-    <!-- TextView for Displaying the Text -->
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="366dp"
-        android:layout_height="336dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/legato_logo" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/splash_screen_text"
-        android:textColor="@android:color/white"
-        android:textSize="90sp"
-        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.699" />
+        app:srcCompat="@drawable/newsplash" />
 </androidx.constraintlayout.widget.ConstraintLayout>
