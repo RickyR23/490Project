@@ -8,5 +8,9 @@
     tools:context=".userHome">
 
 
-
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="100dp"
+        android:layout_height="58dp"
+        android:text="HomePage" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
