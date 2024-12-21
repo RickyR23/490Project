@@ -22,7 +22,9 @@ public class signUp extends AppCompatActivity {
 
                 // Start the LoginActivity
                 startActivity(intent);
-
+                 // TEST CHANGES
+                //TEST CHANGE
+                //TEST CHANGE
                 // Finish the current activity to remove it from the back stack
                 finish();
             }
