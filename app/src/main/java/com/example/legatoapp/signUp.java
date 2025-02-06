@@ -17,13 +17,8 @@ public class signUp extends AppCompatActivity {
         backToLogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create an Intent to start the LoginActivity
                 Intent intent = new Intent(signUp.this, userLoginActivity.class);
-
-                // Start the LoginActivity
                 startActivity(intent);
-
-                // Finish the current activity to remove it from the back stack
                 finish();
             }
         });

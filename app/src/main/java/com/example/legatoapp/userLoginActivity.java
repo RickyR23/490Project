@@ -1,10 +1,9 @@
 package com.example.legatoapp;
 
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
@@ -26,6 +25,15 @@ public class userLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("LegatoPrefs", MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            launchHomeActivity();
+            finish();
+            return;
+        }
+
         binding = ActivityUserLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -33,7 +41,6 @@ public class userLoginActivity extends AppCompatActivity {
         launch_to_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 EditText usernameInput = findViewById(R.id.username);
                 EditText passwordInput = findViewById(R.id.loginPassword);
                 userInputString = usernameInput.getText().toString();
@@ -41,11 +48,11 @@ public class userLoginActivity extends AppCompatActivity {
 
                 Boolean checkLoginValidity = checklogin(userInputString, passwordInputString);
                 Log.d("checkLoginValidity", "is true?: " + checkLoginValidity);
-                if(checkLoginValidity){
+                if (checkLoginValidity) {
+                    saveLoginState(); // Save login status
                     launchHomeActivity();
                     finish();
-                }
-                else{
+                } else {
                     Toast.makeText(userLoginActivity.this, "Login Unsuccessful", Toast.LENGTH_LONG).show();
                 }
             }
@@ -84,28 +91,19 @@ public class userLoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    private void sendLogin(username,password) //sends to python scipt to check login //DB in future //might not keep
-//    {
-//        ProcessBuilder pb = new ProcessBuilder("python", "checklogin.py");
-//        Process process = pb.start();
-//        try (PrintWriter writer = new PrintWriter(process.getOutputStream()))
-//        {
-//            writer.println(username); //send username
-//            write.println(password) //sendpassword
-//            writer.flush();
-//        }
-//    }
-
-    private Boolean checklogin(String username, String password){
+    private Boolean checklogin(String username, String password) {
+        // Mock login credentials
         String mockUsername = "admin";
         String mockPassword = "password";
         Log.d("checkLogin", "mockUser: " + mockUsername + "\ninputUser: " + username + "\n mockPass: " + mockPassword + "\n inputPass: " + password);
-        if(username.equals(mockUsername) && password.equals(mockPassword)){
-            return true; //continue to home page
-        }
-        else{
-            return false; //stay in login page
-        }
+
+        return username.equals(mockUsername) && password.equals(mockPassword);
+    }
+
+    private void saveLoginState() {
+        SharedPreferences sharedPreferences = getSharedPreferences("LegatoPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isLoggedIn", true);
+        editor.apply();
     }
 }
-
