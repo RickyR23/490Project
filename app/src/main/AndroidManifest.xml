@@ -32,7 +32,8 @@
         <activity
             android:name=".userLoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.LegatoApp" /> <!-- Signup Activity -->
+            android:theme="@style/Theme.LegatoApp"
+            android:windowSoftInputMode="adjustResize" /> <!-- This prevents the keyboard from covering input fields on smaller screens -->
         <activity
             android:name=".signUp"
             android:exported="false" />
