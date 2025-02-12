@@ -13,7 +13,14 @@
         android:theme="@style/Theme.LegatoApp"
         tools:targetApi="31">
         <activity
-            android:name=".userLoginActivity"
+            android:name=".forgetPassword"
+            android:exported="false" />
+        <activity
+            android:name=".userHome"
+            android:exported="false"
+            android:theme="@style/Theme.LegatoApp" /> <!-- Splash Screen Activity -->
+        <activity
+            android:name=".splashScreen"
             android:exported="true"
             android:theme="@style/Theme.LegatoApp">
             <intent-filter>
@@ -21,7 +28,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity> <!-- Login Activity -->
+        <activity
+            android:name=".userLoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.LegatoApp"
+            android:windowSoftInputMode="adjustResize" /> <!-- This prevents the keyboard from covering input fields on smaller screens -->
+        <activity
+            android:name=".signUp"
+            android:exported="false" />
     </application>
 
 </manifest>
