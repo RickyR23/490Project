@@ -36,7 +36,8 @@
             android:windowSoftInputMode="adjustResize" /> <!-- This prevents the keyboard from covering input fields on smaller screens -->
         <activity
             android:name=".signUp"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" /> <!-- This prevents the keyboard from covering input fields on smaller screens -->
     </application>
 
 </manifest>
