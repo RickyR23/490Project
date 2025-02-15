@@ -26,7 +26,7 @@ public class signUp extends AppCompatActivity {
 
     private static final String CLIENT_ID = ""; //Always Delete these values prior to pushing to online repo
     private static final String CLIENT_SECRET = ""; //Always Delete these values prior to pushing to online repo
-    private static final String REDIRECT_URI = ""; //Always Delete these values prior to pushing to online repo
+    private static final String REDIRECT_URI = "com.example.legatoapp://callback";
     private static final String SCOPES = "user-read-playback-state user-read-currently-playing";
 
     @Override
