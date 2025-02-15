@@ -5,11 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.legatoapp.Services.AuthService;
+import com.example.legatoapp.models.SpotifyAccessTokenResponse;
+
 import java.net.URI;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class signUp extends AppCompatActivity {
 
@@ -49,7 +60,7 @@ public class signUp extends AppCompatActivity {
         if(receivedUri != null && receivedUri.toString().startsWith(REDIRECT_URI)){
             String authCode = receivedUri.getQueryParameter("code");
             if(authCode != null){
-
+                exchangeAuthorizationForToken(authCode);
             }
         }
     }
@@ -73,6 +84,51 @@ public class signUp extends AppCompatActivity {
 
         Intent intent = new Intent(Intent.ACTION_VIEW, authenticationURI);
         startActivity(intent);
+    }
+
+    private void exchangeAuthorizationForToken(String code){
+        Retrofit retrofitInstance = new Retrofit.Builder()
+                .baseUrl("https://accounts.spotify.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AuthService authenticationService = retrofitInstance.create(AuthService.class);
+
+        String credentials = CLIENT_ID + ":" + CLIENT_SECRET;
+        String authHeader = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+
+        Call<SpotifyAccessTokenResponse> call = authenticationService.getAccessToken(
+                "authorization_code", code, REDIRECT_URI, authHeader
+        );
+
+        call.enqueue(new Callback<SpotifyAccessTokenResponse>() {
+            @Override
+            public void onResponse(Call<SpotifyAccessTokenResponse> call, Response<SpotifyAccessTokenResponse> response) {
+                if(response.isSuccessful() && response.body() != null){
+                    String retrievedAccessToken = response.body().getAccess_token();
+                    String retrievedRefreshToken = response.body().getRefresh_token();
+                    storeSpotifyTokens(retrievedAccessToken, retrievedRefreshToken);
+
+                    Log.d("SpotifyAuthService", "Spotify has received token response: \n Access Token: " + retrievedAccessToken + "\n refreshToken: " + retrievedRefreshToken);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SpotifyAccessTokenResponse> call, Throwable t) {
+                Log.d("SpotifyAuthService", "Spotify AuthService failed to obtain tokens with retrieved error: \n" + t.getMessage());
+            }
+        });
+
+    }
+
+    // TODO: instead of having a method to store tokens to sharedPreferences in each individual class, create a utilitiy sharedPreferenceClass that can be extended to store
+    //  the data where ever that method is inhereted from
+    private void storeSpotifyTokens(String accessToken, String refreshToken){
+        getSharedPreferences("spotify_prefs", MODE_PRIVATE)
+                .edit()
+                .putString("spotify_access_token", accessToken)
+                .putString("spotify_refresh_token", refreshToken)
+                .apply();
     }
 
 
